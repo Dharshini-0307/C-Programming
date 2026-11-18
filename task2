@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+int calls = 0;
+
+int slow_verify(int id)
+{
+    calls++;
+    return 1;
+}
+
+int main()
+{
+    int id;
+    int senior, disability;
+    int result1, result2;
+
+    calls = 0;
+
+    for (id = 1; id <= 1000; id++)
+    {
+        senior = (id % 10 < 3);
+        disability = (id % 20 == 0);
+
+        result1 = (senior && slow_verify(id)) || disability;
+    }
+
+    printf("Order 1 - Slow function calls: %d\n", calls);
+
+    calls = 0;
+
+    for (id = 1; id <= 1000; id++)
+    {
+        senior = (id % 10 < 3);
+        disability = (id % 20 == 0);
+
+        result2 = disability || (senior && slow_verify(id));
+    }
+
+    printf("Order 2 - Slow function calls: %d\n", calls);
+
+    printf("\nShort-circuit demonstration:\n");
+
+    calls = 0;
+    result1 = 0 && slow_verify(10);
+    printf("Using && : %d calls\n", calls);
+
+    calls = 0;
+    result1 = 0 & slow_verify(10);
+    printf("Using &  : %d calls\n", calls);
+
+    return 0;
+}
