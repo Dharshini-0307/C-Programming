@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+int main()
+{
+    double price, quantity;
+    double gross, discount, taxable, tax, total, net;
+    int senior, count = 0;
+
+    printf("Enter price: ");
+    scanf("%lf", &price);
+
+    printf("Enter quantity: ");
+    scanf("%lf", &quantity);
+
+    printf("Senior citizen? (1-Yes, 0-No): ");
+    scanf("%d", &senior);
+
+    gross = price * quantity;
+
+    discount = 0;
+
+    if (senior == 1)
+    {
+        discount = gross * 15 / 100;
+    }
+
+    taxable = gross - discount;
+
+    tax = taxable * 5 / 100;
+
+    total = taxable + tax;
+
+    net = total;
+
+    if (total > 1000)
+    {
+        net = total - 50;
+    }
+
+    count = count + 1;
+
+    printf("\n----- BILL DETAILS -----\n");
+    printf("Gross Amount: Rs. %.2f\n", gross);
+    printf("Discount: Rs. %.2f\n", discount);
+    printf("Taxable Amount: Rs. %.2f\n", taxable);
+    printf("GST: Rs. %.2f\n", tax);
+    printf("Total Amount: Rs. %.2f\n", total);
+    printf("Net Amount: Rs. %.2f\n", net);
+    printf("Count: %d\n", count);
+
+    return 0;
+}
